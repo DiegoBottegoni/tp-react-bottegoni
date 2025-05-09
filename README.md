@@ -1,12 +1,39 @@
-# React + Vite
+# TP React - Diego Bottegoni
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Trabajo práctico del curso de React. Este proyecto es un pequeño e-commerce que permite visualizar productos y manejarlos desde un carrito de compras. Se conecta a una API pública para obtener la información de los productos y usa rutas dinámicas y protegidas para navegar entre vistas.
 
-Currently, two official plugins are available:
+## 🛠️ Tecnologías
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React (con Vite)
+- JavaScript
+- React Router DOM
+- API externa (sugerida por el curso)
 
-## Expanding the ESLint configuration
+## 📦 Funcionalidades
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Listado de productos
+- Manejo de carrito de compras
+- Conexión a API externa
+- Manejo de estados y efectos
+- Navegación con rutas protegidas y dinámicas
+
+## 🚀 Cómo iniciar el proyecto
+
+1. Cloná el repositorio:
+
+```bash
+git clone https://github.com/DiegoBottegoni/tp-react-bottegoni.git
+```
+
+2. Instalá las dependencias:
+```bash
+npm install
+```
+
+2. Iniciá el proyecto en modo de desarrollo:
+```bash
+npm run dev
+```
+
+## 🧪 En desarrollo
+Este proyecto se encuentra en desarrollo como parte de una entrega para el curso de React. Se irá completando en etapas, siguiendo los requerimientos del programa.
