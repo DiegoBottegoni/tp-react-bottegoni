@@ -2,62 +2,54 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 function Cart() {
-    const { cartItems, addToCart, decreaseQuantity, removeFromCart } = useContext(CartContext);
+    const { cartItems, addToCart, decreaseQuantity, removeFromCart, clearCart } = useContext(CartContext);
+
+    const total = cartItems
+        .reduce((acc, item) => acc + item.price * item.quantity, 0)
+        .toFixed(2);
 
     return (
-        <div className="mt-10">
-            <h2 className="text-xl font-bold mb-4">Carrito</h2>
+        <>
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {cartItems.map((item) => (
+                    <li key={item.id} className="card image-full bg-base-100 shadow-md">
+                        <figure>
+                            <img src={item.image} alt={item.title} className="object-cover w-full h-48" />
+                        </figure>
+                        <div className="card-body">
+                            <h2 className="card-title">{item.title}</h2>
+                            <p className="text-sm">Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
 
-            {cartItems.length === 0 ? (
-                <p>El carrito está vacío.</p>
-            ) : (
-                <>
-                    <ul className="space-y-4">
-                        {cartItems.map((item) => (
-                            <li
-                                key={item.id}
-                                className="border p-4 rounded shadow flex flex-col gap-2"
-                            >
-                                <div className="font-semibold">{item.title}</div>
-
-                                <div className="flex items-center gap-2">
-                                    <button
-                                        className="btn btn-sm"
-                                        onClick={() => decreaseQuantity(item.id)}
-                                    >
-                                        -
-                                    </button>
-                                    <span className="px-2">{item.quantity}</span>
-                                    <button
-                                        className="btn btn-sm"
-                                        onClick={() => addToCart(item)}
-                                    >
-                                        +
-                                    </button>
-                                </div>
-
-                                <div className="text-sm">
-                                    Subtotal: ${(item.price * item.quantity).toFixed(2)}
-                                </div>
-
-                                <button
-                                    className="btn btn-sm btn-error self-end"
-                                    onClick={() => removeFromCart(item.id)}
-                                >
-                                    Eliminar producto
+                            <div className="flex items-center gap-2">
+                                <button className="btn btn-sm" onClick={() => decreaseQuantity(item.id)}>
+                                    -
                                 </button>
-                            </li>
-                        ))}
-                    </ul>
+                                <span className="px-2">{item.quantity}</span>
+                                <button className="btn btn-sm" onClick={() => addToCart(item)}>
+                                    +
+                                </button>
+                            </div>
 
-                    <div className="mt-6 text-right text-lg font-bold">
-                        Total: ${cartItems
-                            .reduce((acc, item) => acc + item.price * item.quantity, 0)
-                            .toFixed(2)}
-                    </div>
-                </>
-            )}
-        </div>
+                            <div className="card-actions justify-end mt-4">
+                                <button className="btn btn-sm btn-error" onClick={() => removeFromCart(item.id)}>
+                                    Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+
+            <div className="mt-10 text-right pr-4 text-lg font-bold">
+                Total: ${total}
+            </div>
+            <button
+                onClick={clearCart}
+                className="btn btn-outline btn-error btn-sm mt-6"
+            >
+                Vaciar carrito
+            </button>
+        </>
     );
 }
 

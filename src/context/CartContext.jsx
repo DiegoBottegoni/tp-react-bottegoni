@@ -1,8 +1,25 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
     const [cartItems, setCartItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [products, setProducts] = useState([]);
+
+    // Fetch de productos, ahora manejado en el contexto
+    useEffect(() => {
+        setIsLoading(true);
+        fetch("https://fakestoreapi.com/products")
+            .then((res) => {
+                if (!res.ok) throw new Error("Error en la API");
+                return res.json();
+            })
+            .then((data) => setProducts(data))
+            .catch((err) => setError(err.message))
+            .finally(() => setIsLoading(false));
+    }, []);
 
     const addToCart = (product) => {
         setCartItems((prev) => {
@@ -17,6 +34,8 @@ export function CartProvider({ children }) {
             return [...prev, { ...product, quantity: 1 }];
         });
     };
+
+    const clearCart = () => setCartItems([]);
 
     const decreaseQuantity = (id) => {
         setCartItems((prev) =>
@@ -36,7 +55,16 @@ export function CartProvider({ children }) {
 
     return (
         <CartContext.Provider
-            value={{ cartItems, addToCart, decreaseQuantity, removeFromCart }}
+            value={{
+                cartItems,
+                isLoading,
+                error,
+                products, // Ahora los productos están disponibles globalmente
+                addToCart,
+                decreaseQuantity,
+                removeFromCart,
+                clearCart
+            }}
         >
             {children}
         </CartContext.Provider>
