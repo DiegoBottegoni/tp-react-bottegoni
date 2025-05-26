@@ -7,8 +7,9 @@ export function CartProvider({ children }) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [products, setProducts] = useState([]);
+    const [loggedIn, setLoggedIn] = useState(false);
 
-    // Fetch de productos, ahora manejado en el contexto
+    // Fetch de productos manejado en el contexto
     useEffect(() => {
         setIsLoading(true);
         fetch("https://fakestoreapi.com/products")
@@ -56,14 +57,16 @@ export function CartProvider({ children }) {
     return (
         <CartContext.Provider
             value={{
-                cartItems,
-                isLoading,
-                error,
-                products, // Ahora los productos están disponibles globalmente
-                addToCart,
-                decreaseQuantity,
-                removeFromCart,
-                clearCart
+                cartItems, // Elementos del carrito
+                isLoading, // Estado de carga
+                error, // Manejo de errores
+                products, // Productos están disponibles globalmente
+                loggedIn, // Estado de autenticación
+                setLoggedIn, // Permite cambiar el estado de loggedIn
+                addToCart, // Función para agregar productos al carrito
+                decreaseQuantity, // Función para disminuir la cantidad de un producto en el carrito
+                removeFromCart, // Función para eliminar un producto del carrito
+                clearCart // Función para limpiar el carrito
             }}
         >
             {children}
