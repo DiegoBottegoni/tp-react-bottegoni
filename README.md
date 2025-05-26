@@ -2,6 +2,11 @@
 
 Trabajo práctico del curso de React. Este proyecto es un pequeño e-commerce que permite visualizar productos y manejarlos desde un carrito de compras. Se conecta a una API pública para obtener la información de los productos y usa rutas dinámicas y protegidas para navegar entre vistas.
 
+## TP Deployed
+
+Acá podes ir viendo el progreso:
+[LiveProject](https://tp-react-project.netlify.app/)
+
 ## 🛠️ Tecnologías
 
 - React (con Vite)
