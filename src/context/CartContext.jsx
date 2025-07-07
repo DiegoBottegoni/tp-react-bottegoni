@@ -7,12 +7,12 @@ export function CartProvider({ children }) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [products, setProducts] = useState([]);
-    const [loggedIn, setLoggedIn] = useState(false);
 
     // Fetch de productos manejado en el contexto
     useEffect(() => {
         setIsLoading(true);
-        fetch("https://fakestoreapi.com/products")
+        // fetch("https://fakestoreapi.com/products")
+        fetch("https://686bf84314219674dcc6c89e.mockapi.io/api/v1/products/products")
             .then((res) => {
                 if (!res.ok) throw new Error("Error en la API");
                 return res.json();
@@ -61,8 +61,6 @@ export function CartProvider({ children }) {
                 isLoading, // Estado de carga
                 error, // Manejo de errores
                 products, // Productos están disponibles globalmente
-                loggedIn, // Estado de autenticación
-                setLoggedIn, // Permite cambiar el estado de loggedIn
                 addToCart, // Función para agregar productos al carrito
                 decreaseQuantity, // Función para disminuir la cantidad de un producto en el carrito
                 removeFromCart, // Función para eliminar un producto del carrito

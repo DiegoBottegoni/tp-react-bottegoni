@@ -1,19 +1,18 @@
 import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { AuthContext } from "../context/AuthContext";
 
-export const useAuth = () => {
-    const { loggedIn } = useContext(CartContext);
-    return { loggedIn };
-};
 export const authRoutesProtection = (Component) => {
-    return (props) => {
-        const { loggedIn } = useAuth();
+    return function ProtectedComponent(props) {
+        const { loggedIn } = useContext(AuthContext);
 
         if (!loggedIn) {
-            return <div className="text-center text-red-500">Acceso denegado. Por favor, inicia sesión.</div>;
+            return (
+                <div className="text-center text-red-500 mt-8">
+                    Acceso denegado. Por favor, inicia sesión.
+                </div>
+            );
         }
 
         return <Component {...props} />;
     };
 };
-export default authRoutesProtection;

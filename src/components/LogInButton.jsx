@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { AuthContext } from "../context/AuthContext";
 
 
 function LogInButton() {
-  const { setLoggedIn } = useContext(CartContext);
+  const { login } = useContext(AuthContext);
 
   const handleLogin = () => {
     // Simular login
-    setLoggedIn(true);
+    login();
   };
 
   return (
