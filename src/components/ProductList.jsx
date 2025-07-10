@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function ProductList({ admin = false }) {
-    const { products, isLoading, error, addToCart, removeProductById } = useContext(CartContext);
+    const { products, isLoading, error, addToCart, fetchProducts } = useContext(CartContext);
     const [productToDelete, setProductToDelete] = useState(null);
     const [isDeleting, setIsDeleting] = useState(false);
 
@@ -16,8 +16,8 @@ function ProductList({ admin = false }) {
             await axios.delete(
                 `https://686bf84314219674dcc6c89e.mockapi.io/api/v1/products/products/${productToDelete}`
             );
-            removeProductById(productToDelete);
             toast.success("Producto eliminado");
+            await fetchProducts();
         } catch {
             toast.error("Error al eliminar el producto");
         } finally {
@@ -97,6 +97,7 @@ function ProductList({ admin = false }) {
                 ))}
             </div>
 
+            {/* Modal de confirmación */}
             {productToDelete && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white p-6 rounded shadow-md max-w-sm w-full">

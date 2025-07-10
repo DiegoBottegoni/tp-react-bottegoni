@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { CartContext } from "../context/CartContext";
 
 function ProductEdit() {
+    const { fetchProducts } = useContext(CartContext);
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -14,17 +16,14 @@ function ProductEdit() {
         category: "",
         image: "",
     });
+
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         axios.get(`https://686bf84314219674dcc6c89e.mockapi.io/api/v1/products/products/${id}`)
-            .then((res) => {
-                setForm(res.data);
-            })
-            .catch(() => {
-                toast.error("Error al obtener el producto");
-            })
+            .then((res) => setForm(res.data))
+            .catch(() => toast.error("Error al obtener el producto"))
             .finally(() => setLoading(false));
     }, [id]);
 
@@ -50,8 +49,13 @@ function ProductEdit() {
         }
 
         try {
-            await axios.put(`https://686bf84314219674dcc6c89e.mockapi.io/api/v1/products/products/${id}`, form);
+            await axios.put(`https://686bf84314219674dcc6c89e.mockapi.io/api/v1/products/products/${id}`, {
+                ...form,
+                price: Number(form.price)
+            });
+
             toast.success("Producto actualizado");
+            await fetchProducts();
             navigate("/products");
         } catch {
             toast.error("Error al actualizar el producto");

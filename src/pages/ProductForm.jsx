@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { CartContext } from "../context/CartContext";
 
 function ProductForm() {
+    const { fetchProducts } = useContext(CartContext);
     const navigate = useNavigate();
     const [form, setForm] = useState({
         title: "",
@@ -47,7 +49,9 @@ function ProductForm() {
                     count: 0
                 }
             });
+
             toast.success("Producto creado con éxito");
+            await fetchProducts();
             navigate("/products");
         } catch (err) {
             toast.error("Error al crear el producto");

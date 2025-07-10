@@ -7,13 +7,16 @@ import Layout from "./components/Layout";
 import { authRoutesProtection } from "../src/middleware/authRoutesProtection";
 import ProductForm from "./pages/ProductForm";
 import ProductEdit from "./pages/ProductEdit";
-import AdminProductsPage from "./pages/AdminProductsPage"; // ✅ importar
+import AdminProductsPage from "./pages/AdminProductsPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-// ✅ aplicar protección
+
+// Rutas protegidas
 const ProtectedCart = authRoutesProtection(CartPage);
 const ProtectedCreateProduct = authRoutesProtection(ProductForm);
 const ProtectedEditProduct = authRoutesProtection(ProductEdit);
-const ProtectedAdminProducts = authRoutesProtection(AdminProductsPage); // ✅ nuevo
+const ProtectedAdminProducts = authRoutesProtection(AdminProductsPage);
 
 function App() {
   return (
@@ -26,9 +29,17 @@ function App() {
           <Route path="cart" element={<ProtectedCart />} />
           <Route path="admin/create" element={<ProtectedCreateProduct />} />
           <Route path="products/:id/edit" element={<ProtectedEditProduct />} />
-          <Route path="admin/products" element={<ProtectedAdminProducts />} /> {/* ✅ nuevo */}
+          <Route path="admin/products" element={<ProtectedAdminProducts />} />
         </Route>
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
     </Router>
   );
 }

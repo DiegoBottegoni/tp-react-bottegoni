@@ -8,18 +8,25 @@ export function CartProvider({ children }) {
     const [error, setError] = useState(null);
     const [products, setProducts] = useState([]);
 
-    // Fetch de productos manejado en el contexto
-    useEffect(() => {
+    // Función reutilizable para obtener productos
+    const fetchProducts = async () => {
         setIsLoading(true);
-        // fetch("https://fakestoreapi.com/products")
-        fetch("https://686bf84314219674dcc6c89e.mockapi.io/api/v1/products/products")
-            .then((res) => {
-                if (!res.ok) throw new Error("Error en la API");
-                return res.json();
-            })
-            .then((data) => setProducts(data))
-            .catch((err) => setError(err.message))
-            .finally(() => setIsLoading(false));
+        try {
+            const res = await fetch("https://686bf84314219674dcc6c89e.mockapi.io/api/v1/products/products");
+            if (!res.ok) throw new Error("Error en la API");
+            const data = await res.json();
+            setProducts(data);
+            setError(null);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // Se llama automáticamente al montar el componente
+    useEffect(() => {
+        fetchProducts();
     }, []);
 
     const addToCart = (product) => {
@@ -57,14 +64,15 @@ export function CartProvider({ children }) {
     return (
         <CartContext.Provider
             value={{
-                cartItems, // Elementos del carrito
-                isLoading, // Estado de carga
-                error, // Manejo de errores
-                products, // Productos están disponibles globalmente
-                addToCart, // Función para agregar productos al carrito
-                decreaseQuantity, // Función para disminuir la cantidad de un producto en el carrito
-                removeFromCart, // Función para eliminar un producto del carrito
-                clearCart // Función para limpiar el carrito
+                cartItems,
+                isLoading,
+                error,
+                products,
+                addToCart,
+                decreaseQuantity,
+                removeFromCart,
+                clearCart,
+                fetchProducts
             }}
         >
             {children}
