@@ -7,13 +7,13 @@ import Layout from "./components/Layout";
 import { authRoutesProtection } from "../src/middleware/authRoutesProtection";
 import ProductForm from "./pages/ProductForm";
 import ProductEdit from "./pages/ProductEdit";
+import AdminProductsPage from "./pages/AdminProductsPage"; // ✅ importar
 
-
-
+// ✅ aplicar protección
 const ProtectedCart = authRoutesProtection(CartPage);
 const ProtectedCreateProduct = authRoutesProtection(ProductForm);
 const ProtectedEditProduct = authRoutesProtection(ProductEdit);
-
+const ProtectedAdminProducts = authRoutesProtection(AdminProductsPage); // ✅ nuevo
 
 function App() {
   return (
@@ -25,7 +25,8 @@ function App() {
           <Route path="products/:id" element={<ProductDetail />} />
           <Route path="cart" element={<ProtectedCart />} />
           <Route path="admin/create" element={<ProtectedCreateProduct />} />
-          <Route path="products/:id/edit" element={<ProductEdit />} />
+          <Route path="products/:id/edit" element={<ProtectedEditProduct />} />
+          <Route path="admin/products" element={<ProtectedAdminProducts />} /> {/* ✅ nuevo */}
         </Route>
       </Routes>
     </Router>

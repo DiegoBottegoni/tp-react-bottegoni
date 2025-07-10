@@ -20,10 +20,11 @@ function Navbar() {
                 <Link to="/" className="hover:text-primary font-semibold">Inicio</Link>
                 <Link to="/products" className="hover:text-primary font-semibold">Productos</Link>
                 {isLoggedIn && (
-                    <Link to="/admin/create" className="hover:text-primary font-semibold">
-                        Agregar Producto
+                    <Link to="/admin/products" className="hover:text-primary font-semibold">
+                        Administrar Productos
                     </Link>
                 )}
+
             </div>
 
             {/* Carrito + Theme switch a la derecha */}
