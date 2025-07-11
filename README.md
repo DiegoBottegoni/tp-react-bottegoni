@@ -1,6 +1,6 @@
 # TP React - Diego Bottegoni
 
-Trabajo práctico del curso de React. Este proyecto es un pequeño e-commerce que permite visualizar productos y manejarlos desde un carrito de compras. Se conecta a una API pública para obtener la información de los productos y usa rutas dinámicas y protegidas para navegar entre vistas.
+Trabajo práctico del curso de React. Este proyecto simula un pequeño e-commerce con autenticación de usuarios, administración de productos y carrito de compras. Utiliza Context API y MockAPI como backend fake para el manejo de datos.
 
 ## TP Deployed
 
