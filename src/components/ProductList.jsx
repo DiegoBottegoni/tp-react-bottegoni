@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+const PRODUCTS_PER_PAGE = 6;
+
 function ProductList({ admin = false }) {
-    const { products, isLoading, error, addToCart, fetchProducts } = useContext(CartContext);
+    const { products, isLoading, error, addToCart, removeProductById } = useContext(CartContext);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
     const [productToDelete, setProductToDelete] = useState(null);
     const [isDeleting, setIsDeleting] = useState(false);
 
@@ -16,13 +20,29 @@ function ProductList({ admin = false }) {
             await axios.delete(
                 `https://686bf84314219674dcc6c89e.mockapi.io/api/v1/products/products/${productToDelete}`
             );
+            removeProductById(productToDelete);
             toast.success("Producto eliminado");
-            await fetchProducts();
         } catch {
             toast.error("Error al eliminar el producto");
         } finally {
             setIsDeleting(false);
             setProductToDelete(null);
+        }
+    };
+
+    const filteredProducts = products.filter((product) =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.category.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Lógica de paginación
+    const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+    const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+    const currentProducts = filteredProducts.slice(startIndex, startIndex + PRODUCTS_PER_PAGE);
+
+    const handlePageChange = (page) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
         }
     };
 
@@ -46,8 +66,21 @@ function ProductList({ admin = false }) {
                 )}
             </div>
 
+            <div className="mb-6">
+                <input
+                    type="text"
+                    placeholder="Buscar por nombre o categoría"
+                    value={searchTerm}
+                    onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                        setCurrentPage(1); // volver a página 1 si cambia el filtro
+                    }}
+                    className="input input-bordered w-full"
+                />
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {products.map((product) => (
+                {currentProducts.map((product) => (
                     <div
                         key={product.id}
                         className="card shadow-md rounded-lg overflow-hidden flex flex-col bg-base-300"
@@ -96,6 +129,35 @@ function ProductList({ admin = false }) {
                     </div>
                 ))}
             </div>
+
+            {/* Paginador */}
+            {totalPages > 1 && (
+                <div className="mt-8 flex justify-center items-center gap-2">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="btn btn-sm"
+                    >
+                        ← Anterior
+                    </button>
+                    {[...Array(totalPages)].map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handlePageChange(index + 1)}
+                            className={`btn btn-sm ${currentPage === index + 1 ? "btn-primary" : "btn-ghost"}`}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className="btn btn-sm"
+                    >
+                        Siguiente →
+                    </button>
+                </div>
+            )}
 
             {/* Modal de confirmación */}
             {productToDelete && (

@@ -9,20 +9,29 @@ Acá podes ir viendo el progreso:
 
 ## 🛠️ Tecnologías
 
-- React (con Vite)
-- JavaScript
+- React (Vite)
 - React Router DOM
-- API externa (sugerida por el curso)
+- Context API
+- JavaScript
+- Styled Components
+- Bootstrap
+- React Toastify
+- React Icons
+- MockAPI
 
 ## 📦 Funcionalidades
 
-- Listado de productos
-- Manejo de carrito de compras
-- Conexión a API externa
-- Manejo de estados y efectos
-- Navegación con rutas protegidas y dinámicas
+- Login simulado (con localStorage)
+- Carrito de compras (Context API)
+- CRUD completo de productos (MockAPI)
+- Búsqueda en tiempo real por nombre/categoría
+- Paginación de productos
+- Rutas protegidas para usuarios autenticados
+- Panel de administración de productos
+- Manejo de errores y estados de carga
+- Diseño responsivo
 
-## 🚀 Cómo iniciar el proyecto
+## 🚀 Cómo iniciar el proyecto local
 
 1. Cloná el repositorio:
 
