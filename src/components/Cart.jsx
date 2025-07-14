@@ -11,9 +11,7 @@ function Cart() {
     return (
         <>
             <div className="max-w-6xl mx-auto px-4 py-8">
-
                 <h1 className="text-3xl font-bold mb-6">Tu carrito</h1>
-
                 {cartItems.length === 0 ? (
                     <p >No hay productos en el carrito.</p>
                 ) : (
@@ -35,7 +33,6 @@ function Cart() {
                                             <span>{item.quantity}</span>
                                             <button className="btn btn-sm" onClick={() => addToCart(item)}>+</button>
                                         </div>
-
                                         <button
                                             className="btn btn-error btn-xs mt-2"
                                             onClick={() => removeFromCart(item.id)}

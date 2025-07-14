@@ -12,7 +12,6 @@ function LogInButton() {
 
   return (
     <div>
-
       <StyledButton onClick={handleLogin}>Log In</StyledButton>
     </div>
   )
