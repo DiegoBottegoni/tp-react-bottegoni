@@ -73,7 +73,7 @@ function ProductList({ admin = false }) {
                     value={searchTerm}
                     onChange={(e) => {
                         setSearchTerm(e.target.value);
-                        setCurrentPage(1); // volver a página 1 si cambia el filtro
+                        setCurrentPage(1);
                     }}
                     className="input input-bordered w-full"
                 />
