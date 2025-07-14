@@ -1,6 +1,6 @@
 # TP React - Diego Bottegoni
 
-Trabajo práctico del curso de React. Este proyecto simula un pequeño e-commerce con autenticación de usuarios, administración de productos y carrito de compras. Utiliza Context API y MockAPI como backend fake para el manejo de datos.
+Trabajo práctico del curso de React por Talento Tech. Este proyecto simula un pequeño e-commerce con autenticación de usuarios, administración de productos y carrito de compras. Utiliza Context API y MockAPI como backend fake para el manejo de datos.
 
 ## TP Deployed
 
@@ -13,8 +13,8 @@ Acá podes ir viendo el progreso:
 - React Router DOM
 - Context API
 - JavaScript
-- Styled Components
-- Bootstrap
+- Styled Components (Botón "Ir a productos" del layout, "Agregar al carrito" en productos y el botón de Login en Navbar, son el mismo style-component reciclado)
+- DaisyUI (del estilo Boostrap)
 - React Toastify
 - React Icons
 - MockAPI
@@ -23,7 +23,7 @@ Acá podes ir viendo el progreso:
 
 - Login simulado (con localStorage)
 - Carrito de compras (Context API)
-- CRUD completo de productos (MockAPI)
+- CRUD asíncrono completo de productos (MockAPI)
 - Búsqueda en tiempo real por nombre/categoría
 - Paginación de productos
 - Rutas protegidas para usuarios autenticados
@@ -50,4 +50,4 @@ npm run dev
 ```
 
 ## 🧪 En desarrollo
-Este proyecto se encuentra en desarrollo como parte de una entrega para el curso de React. Se irá completando en etapas, siguiendo los requerimientos del programa.
+Este proyecto se encuentra en desarrollo como parte de una entrega para un curso de React de Talento Tech. Se irá completando en etapas, siguiendo los requerimientos del programa.

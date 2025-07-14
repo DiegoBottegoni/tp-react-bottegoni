@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import StyledButton from "../components/styled/StyledButton";
 
 function ProductDetail() {
     const { id } = useParams();
@@ -25,7 +26,6 @@ function ProductDetail() {
 
     return (
         <div className="flex flex-col items-center mt-10 relative">
-            {/* Sticky container */}
             <div className="sticky top-0 z-10 w-full bg-base-100 p-2 flex justify-start">
                 <Link
                     to="/products"
@@ -53,12 +53,9 @@ function ProductDetail() {
                     <p>{product.description}</p>
                     <div className="text-lg font-bold">${product.price}</div>
                     <div className="card-actions justify-end">
-                        <button
-                            className="btn btn-primary"
-                            onClick={() => addToCart(product)}
-                        >
+                        <StyledButton onClick={() => addToCart(product)}>
                             Agregar al carrito
-                        </button>
+                        </StyledButton>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-
+import StyledButton from "./styled/StyledButton";
 
 function LogInButton() {
   const { login } = useContext(AuthContext);
@@ -13,7 +13,7 @@ function LogInButton() {
   return (
     <div>
 
-      <button className="btn btn-accent" onClick={handleLogin}>Log In</button>
+      <StyledButton onClick={handleLogin}>Log In</StyledButton>
     </div>
   )
 }

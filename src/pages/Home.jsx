@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import StyledButton from "../components/styled/StyledButton";
 
 function Home() {
     const navigate = useNavigate();
@@ -12,9 +13,9 @@ function Home() {
                         Descubrí productos increíbles al mejor precio. Comprá fácil, rápido y seguro. <br />
                         ¿Listo para empezar?
                     </p>
-                    <button className="btn btn-primary-content" onClick={() => navigate('/products')}>
+                    <StyledButton onClick={() => navigate('/products')}>
                         Ir a productos
-                    </button>
+                    </StyledButton>
                 </div>
             </div>
         </div>
